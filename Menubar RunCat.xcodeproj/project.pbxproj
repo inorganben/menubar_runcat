@@ -11,6 +11,13 @@
 		1CEF10A022F922DB00DAD355 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF109F22F922DB00DAD355 /* AppDelegate.swift */; };
 		1CEF10A422F922DD00DAD355 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CEF10A322F922DD00DAD355 /* Assets.xcassets */; };
 		1CEF10B022F9342600DAD355 /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF10AF22F9342600DAD355 /* CPU.swift */; };
+		1C6B742E2A1764EE006D95B4 /* Animations in Resources */ = {isa = PBXBuildFile; fileRef = 1C6B742D2A1764EE006D95B4 /* Animations */; };
+		1C6B74312A1768C4006D95B4 /* AnimationConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B74302A1768C4006D95B4 /* AnimationConfig.swift */; };
+		1C6B74332A1768D7006D95B4 /* AnimationAssetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B74322A1768D7006D95B4 /* AnimationAssetLoader.swift */; };
+		1C6B74352A1768E8006D95B4 /* AnimationRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B74342A1768E8006D95B4 /* AnimationRunner.swift */; };
+		1C6B74372A1768F8006D95B4 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B74362A1768F8006D95B4 /* Metrics.swift */; };
+		1C6B74392A17690A006D95B4 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B74382A17690A006D95B4 /* Preferences.swift */; };
+		1C6B743B2A17691E006D95B4 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6B743A2A17691E006D95B4 /* StatusBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +28,13 @@
 		1CEF10A822F922DD00DAD355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CEF10A922F922DD00DAD355 /* Menubar_RunCat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Menubar_RunCat.entitlements; sourceTree = "<group>"; };
 		1CEF10AF22F9342600DAD355 /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
+		1C6B742D2A1764EE006D95B4 /* Animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Animations; sourceTree = "<group>"; };
+		1C6B74302A1768C4006D95B4 /* AnimationConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationConfig.swift; sourceTree = "<group>"; };
+		1C6B74322A1768D7006D95B4 /* AnimationAssetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationAssetLoader.swift; sourceTree = "<group>"; };
+		1C6B74342A1768E8006D95B4 /* AnimationRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationRunner.swift; sourceTree = "<group>"; };
+		1C6B74362A1768F8006D95B4 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		1C6B74382A17690A006D95B4 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		1C6B743A2A17691E006D95B4 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,13 @@
 				1C0ADF312A175F0B00867AB3 /* main.swift */,
 				1CEF109F22F922DB00DAD355 /* AppDelegate.swift */,
 				1CEF10AF22F9342600DAD355 /* CPU.swift */,
+				1C6B74302A1768C4006D95B4 /* AnimationConfig.swift */,
+				1C6B74322A1768D7006D95B4 /* AnimationAssetLoader.swift */,
+				1C6B74342A1768E8006D95B4 /* AnimationRunner.swift */,
+				1C6B74362A1768F8006D95B4 /* Metrics.swift */,
+				1C6B74382A17690A006D95B4 /* Preferences.swift */,
+				1C6B743A2A17691E006D95B4 /* StatusBarController.swift */,
+				1C6B742D2A1764EE006D95B4 /* Animations */,
 				1CEF10A322F922DD00DAD355 /* Assets.xcassets */,
 				1CEF10A822F922DD00DAD355 /* Info.plist */,
 				1CEF10A922F922DD00DAD355 /* Menubar_RunCat.entitlements */,
@@ -123,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CEF10A422F922DD00DAD355 /* Assets.xcassets in Resources */,
+				1C6B742E2A1764EE006D95B4 /* Animations in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +157,12 @@
 			files = (
 				1CEF10B022F9342600DAD355 /* CPU.swift in Sources */,
 				1CEF10A022F922DB00DAD355 /* AppDelegate.swift in Sources */,
+				1C6B74312A1768C4006D95B4 /* AnimationConfig.swift in Sources */,
+				1C6B74332A1768D7006D95B4 /* AnimationAssetLoader.swift in Sources */,
+				1C6B74352A1768E8006D95B4 /* AnimationRunner.swift in Sources */,
+				1C6B74372A1768F8006D95B4 /* Metrics.swift in Sources */,
+				1C6B74392A17690A006D95B4 /* Preferences.swift in Sources */,
+				1C6B743B2A17691E006D95B4 /* StatusBarController.swift in Sources */,
 				1C0ADF322A175F0B00867AB3 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,7 +227,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx15.5;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -255,7 +283,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx15.5;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -267,12 +296,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Menubar RunCat/Menubar_RunCat.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = VJ5N2X84K8;
+				DEVELOPMENT_TEAM = 2W2322QJ2J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Menubar RunCat/Info.plist";
@@ -296,12 +325,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Menubar RunCat/Menubar_RunCat.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = VJ5N2X84K8;
+				DEVELOPMENT_TEAM = 2W2322QJ2J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Menubar RunCat/Info.plist";

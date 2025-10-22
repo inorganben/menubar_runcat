@@ -1,0 +1,16 @@
+{
+  "id": "classic-cat",
+  "displayName": "Classic Cat",
+  "frameDirectory": "frames",
+  "filePattern": "cat-page-",
+  "frameCount": 5,
+  "frameExtension": "png",
+  "frameSize": { "width": 28, "height": 18 },
+  "template": true,
+  "metric": "cpu",
+  "speedPolicy": {
+    "type": "cpuLinear",
+    "minInterval": 0.08,
+    "maxInterval": 0.5
+  }
+}

@@ -1,18 +1,14 @@
-# menubar_runcat
+# MenuBar RunCat
 
-<!-- # Short Description -->
+由这个开源项目分支而来：
+[menubar-runcat](https://github.com/inorganben/menubar_runcat)
 
-A cute Running Cat animation on your MacBook menubar.
+# 新增功能
+从 `~/.menubar_runcat` 目录中读取配置，可以自定义 贴图
 
-This project is a reduced version of RunCat.app (App Store).
-
-<!-- # Badges -->
-
-[![Github issues](https://img.shields.io/github/issues/Kyome22/menubar_runcat)](https://github.com/Kyome22/menubar_runcat/issues)
-[![Github forks](https://img.shields.io/github/forks/Kyome22/menubar_runcat)](https://github.com/Kyome22/menubar_runcat/network/members)
-[![Github stars](https://img.shields.io/github/stars/Kyome22/menubar_runcat)](https://github.com/Kyome22/menubar_runcat/stargazers)
-[![Github top language](https://img.shields.io/github/languages/top/Kyome22/menubar_runcat)](https://github.com/Kyome22/menubar_runcat/)
-[![Github license](https://img.shields.io/github/license/Kyome22/menubar_runcat)](https://github.com/Kyome22/menubar_runcat/)
+[![Github stars](https://img.shields.io/github/stars/inorganben/menubar_runcat)](https://github.com/inorganben/menubar_runcat/stargazers)
+[![Github top language](https://img.shields.io/github/languages/top/inorganben/menubar_runcat)](https://github.com/inorganben/menubar_runcat/)
+[![Github license](https://img.shields.io/github/license/inorganben/menubar_runcat)](https://github.com/inorganben/menubar_runcat/)
 
 # Tags
 
@@ -20,10 +16,4 @@ This project is a reduced version of RunCat.app (App Store).
 
 # Demo
 
-![Demo](resources/demo.gif)
-
-# Contributors
-
-- [Kyome22](https://github.com/Kyome22)
-
-<!-- CREATED_BY_LEADYOU_README_GENERATOR -->
+![Demo](resources/demo.jpg)

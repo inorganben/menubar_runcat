@@ -1,0 +1,16 @@
+{
+  "id": "party-parrot",
+  "displayName": "Party Parrot",
+  "frameDirectory": "frames",
+  "filePattern": "party-parrot-page-",
+  "frameCount": 10,
+  "frameExtension": "png",
+  "frameSize": { "width": 24, "height": 18 },
+  "template": false,
+  "metric": "cpu",
+  "speedPolicy": {
+    "type": "cpuLinear",
+    "minInterval": 0.05,
+    "maxInterval": 0.4
+  }
+}

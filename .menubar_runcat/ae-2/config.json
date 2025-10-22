@@ -1,0 +1,17 @@
+{
+  "id": "ae-2",
+  "displayName": "AE 2",
+  "frameDirectory": "frames",
+  "filePattern": "ae2-",
+  "frameCount": 12,
+  "frameExtension": "png",
+  "frameSize": { "width": 18, "height": 18 },
+  "template": false,
+  "metric": "cpu",
+  "speedPolicy": {
+    "type": "cpuLinear",
+    "minInterval": 0.05,
+    "maxInterval": 0.4
+  }
+}
+
