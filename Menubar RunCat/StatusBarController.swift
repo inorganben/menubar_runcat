@@ -185,13 +185,14 @@ final class StatusBarController: NSObject {
 
     private func updateExternalDirectory(url: URL) {
         releaseExternalDirectoryAccess()
-        let granted = url.startAccessingSecurityScopedResource()
-        guard granted else {
-            NSLog("[Menubar RunCat] Failed to access directory: %@", url.path)
-            return
-        }
         externalDirectoryURL = url
-        isAccessingExternalDirectory = true
+        let granted = url.startAccessingSecurityScopedResource()
+        if granted {
+            isAccessingExternalDirectory = true
+        } else {
+            isAccessingExternalDirectory = false
+            NSLog("[Menubar RunCat] Accessing external directory without security scope: %@", url.path)
+        }
         ensureDirectoryExists(at: url)
     }
 
@@ -205,7 +206,7 @@ final class StatusBarController: NSObject {
     }
 
     private func externalDirectoriesForLoading() -> [URL] {
-        guard isAccessingExternalDirectory, let url = externalDirectoryURL else { return [] }
+        guard let url = externalDirectoryURL else { return [] }
         return [url]
     }
 
