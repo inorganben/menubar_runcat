@@ -1,0 +1,17 @@
+{
+  "id": "jingubang",
+  "displayName": "金箍棒",
+  "frameDirectory": "frames",
+  "filePattern": "金箍棒-",
+  "frameCount": 16,
+  "frameExtension": "png",
+  "frameSize": { "height": 30 },
+  "template": false,
+  "metric": "cpu",
+  "speedPolicy": {
+    "type": "cpuLinear",
+    "minInterval": 0.05,
+    "maxInterval": 0.4
+  }
+}
+
