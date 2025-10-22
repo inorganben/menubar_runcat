@@ -1,0 +1,104 @@
+name: Build Universal DMG
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Menubar RunCat universal binaries
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect scheme
+        run: |
+          set -euo pipefail
+          mkdir -p build
+          xcodebuild -list -json > build/xcode_info.json
+          SCHEME=$(python3 - <<'PY'
+import json
+with open("build/xcode_info.json") as f:
+    data = json.load(f)
+if "project" in data and data["project"].get("targets"):
+    print(data["project"]["targets"][0])
+elif "workspace" in data and data["workspace"].get("schemes"):
+    print(data["workspace"]["schemes"][0])
+else:
+    raise SystemExit("Unable to determine default scheme")
+PY
+)
+          echo "$SCHEME" > default_scheme
+          echo "SCHEME=$SCHEME" >> "$GITHUB_ENV"
+
+      - name: Determine build file
+        id: xcode-file
+        run: |
+          set -euo pipefail
+          if ls -1 *.xcworkspace >/dev/null 2>&1; then
+            FILETYPE="workspace"
+            FILE=$(ls -1 *.xcworkspace | head -n 1)
+          else
+            FILETYPE="project"
+            FILE=$(ls -1 *.xcodeproj | head -n 1)
+          fi
+          echo "filetype=$FILETYPE" >> "$GITHUB_OUTPUT"
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Build arm64 archive
+        run: |
+          set -euo pipefail
+          scheme=${SCHEME:-$(cat default_scheme)}
+          filetype=${{ steps.xcode-file.outputs.filetype }}
+          file=${{ steps.xcode-file.outputs.file }}
+          xcodebuild archive \
+            -scheme "$scheme" \
+            -$filetype "$file" \
+            -configuration Release \
+            -destination "generic/platform=macOS" \
+            ARCHS=arm64 ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
+            -archivePath build/arm64.xcarchive
+
+      - name: Build x86_64 archive
+        run: |
+          set -euo pipefail
+          scheme=${SCHEME:-$(cat default_scheme)}
+          filetype=${{ steps.xcode-file.outputs.filetype }}
+          file=${{ steps.xcode-file.outputs.file }}
+          xcodebuild archive \
+            -scheme "$scheme" \
+            -$filetype "$file" \
+            -configuration Release \
+            -destination "generic/platform=macOS" \
+            ARCHS=x86_64 ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
+            -archivePath build/x86_64.xcarchive
+
+      - name: Create universal app bundle
+        run: |
+          set -euo pipefail
+          APP_NAME="Menubar RunCat.app"
+          BIN_REL_PATH="Contents/MacOS/Menubar RunCat"
+          mkdir -p build/output
+          cp -R "build/arm64.xcarchive/Products/Applications/$APP_NAME" build/output/
+          lipo -create \
+            "build/arm64.xcarchive/Products/Applications/$APP_NAME/$BIN_REL_PATH" \
+            "build/x86_64.xcarchive/Products/Applications/$APP_NAME/$BIN_REL_PATH" \
+            -output "build/output/$APP_NAME/$BIN_REL_PATH"
+
+      - name: Create DMG
+        run: |
+          set -euo pipefail
+          DMG_PATH="build/Menubar-RunCat-universal.dmg"
+          hdiutil create \
+            -volname "Menubar RunCat" \
+            -srcfolder "build/output/Menubar RunCat.app" \
+            -ov -format UDZO "$DMG_PATH"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: menubar-runcat-universal-dmg
+          path: build/Menubar-RunCat-universal.dmg
