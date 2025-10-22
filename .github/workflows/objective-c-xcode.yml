@@ -17,18 +17,7 @@ jobs:
           set -euo pipefail
           mkdir -p build
           xcodebuild -list -json > build/xcode_info.json
-          SCHEME=$(python3 - <<'PY'
-            import json
-            with open("build/xcode_info.json") as f:
-                data = json.load(f)
-            if "project" in data and data["project"].get("targets"):
-                print(data["project"]["targets"][0])
-            elif "workspace" in data and data["workspace"].get("schemes"):
-                print(data["workspace"]["schemes"][0])
-            else:
-                raise SystemExit("Unable to determine default scheme")
-          PY
-          )
+          SCHEME=$(ruby -e 'require "json"; data = JSON.parse(File.read("build/xcode_info.json")); project = data.dig("project", "targets"); workspace = data.dig("workspace", "schemes"); scheme = (project && project.first) || (workspace && workspace.first); abort("Unable to determine default scheme") unless scheme; puts scheme')
           echo "$SCHEME" > default_scheme
           echo "SCHEME=$SCHEME" >> "$GITHUB_ENV"
 
