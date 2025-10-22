@@ -34,8 +34,8 @@ jobs:
       - name: Detect default scheme
         run: |
           set -euo pipefail
-          filetype=${{ steps.xcode-locator.outputs.filetype }}
-          file=${{ steps.xcode-locator.outputs.file }}
+          filetype="${{ steps.xcode-locator.outputs.filetype }}"
+          file="${{ steps.xcode-locator.outputs.file }}"
           mkdir -p build
           if [ "$filetype" = "workspace" ]; then
             xcodebuild -list -json -workspace "$file" > build/xcode_info.json
@@ -57,8 +57,8 @@ jobs:
         run: |
           set -euo pipefail
           scheme=${SCHEME:-$(cat default_scheme)}
-          filetype=${{ steps.xcode-locator.outputs.filetype }}
-          file=${{ steps.xcode-locator.outputs.file }}
+          filetype="${{ steps.xcode-locator.outputs.filetype }}"
+          file="${{ steps.xcode-locator.outputs.file }}"
           xcodebuild archive \
             -scheme "$scheme" \
             -$filetype "$file" \
@@ -72,8 +72,8 @@ jobs:
         run: |
           set -euo pipefail
           scheme=${SCHEME:-$(cat default_scheme)}
-          filetype=${{ steps.xcode-locator.outputs.filetype }}
-          file=${{ steps.xcode-locator.outputs.file }}
+          filetype="${{ steps.xcode-locator.outputs.filetype }}"
+          file="${{ steps.xcode-locator.outputs.file }}"
           xcodebuild archive \
             -scheme "$scheme" \
             -$filetype "$file" \
