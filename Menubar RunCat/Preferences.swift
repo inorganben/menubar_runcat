@@ -9,6 +9,7 @@ final class PreferencesManager {
         static let selectedAnimationID = "selectedAnimationID"
         static let showCPUUsage = "showCPUUsage"
         static let externalAnimationBookmark = "externalAnimationBookmark"
+        static let externalAnimationPath = "externalAnimationPath"
     }
 
     var selectedAnimationID: String? {
@@ -41,6 +42,17 @@ final class PreferencesManager {
                 defaults.set(newValue, forKey: Keys.externalAnimationBookmark)
             } else {
                 defaults.removeObject(forKey: Keys.externalAnimationBookmark)
+            }
+        }
+    }
+
+    var externalAnimationPath: String? {
+        get { defaults.string(forKey: Keys.externalAnimationPath) }
+        set {
+            if let newValue {
+                defaults.set(newValue, forKey: Keys.externalAnimationPath)
+            } else {
+                defaults.removeObject(forKey: Keys.externalAnimationPath)
             }
         }
     }

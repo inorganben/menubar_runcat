@@ -44,7 +44,7 @@ final class CPU {
         let user = 100.0 * userDiff / totalTicks
 
         let value = min(99.9, (10.0 * (sys + user)).rounded() / 10.0)
-        let description = String(format: "%4.1f%% ", value)
+        let description = String(format: "%4.1f%%", value)
         
         return CPUInfo(value, description)
     }

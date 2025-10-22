@@ -139,16 +139,8 @@ final class StatusBarController: NSObject {
         let response = panel.runModal()
         guard response == .OK, let url = panel.url else { return }
 
-        do {
-            let bookmark = try url.bookmarkData(options: [.withSecurityScope],
-                                                includingResourceValuesForKeys: nil,
-                                                relativeTo: nil)
-            preferences.externalAnimationBookmark = bookmark
-            updateExternalDirectory(url: url)
-            reloadAnimations()
-        } catch {
-            NSLog("[Menubar RunCat] Failed to save external animation bookmark: %@", error.localizedDescription)
-        }
+        saveExternalDirectorySelection(url)
+        reloadAnimations()
     }
 
     private func reloadAnimations() {
@@ -163,23 +155,33 @@ final class StatusBarController: NSObject {
 
     private func restoreExternalDirectoryAccessIfNeeded() {
         guard externalDirectoryURL == nil,
-              let bookmark = preferences.externalAnimationBookmark else { return }
-        do {
-            var isStale = false
-            let url = try URL(resolvingBookmarkData: bookmark,
-                              options: [.withSecurityScope],
-                              relativeTo: nil,
-                              bookmarkDataIsStale: &isStale)
-            if isStale {
-                let refreshedBookmark = try url.bookmarkData(options: [.withSecurityScope],
-                                                             includingResourceValuesForKeys: nil,
-                                                             relativeTo: nil)
-                preferences.externalAnimationBookmark = refreshedBookmark
+              (preferences.externalAnimationBookmark != nil || preferences.externalAnimationPath != nil) else { return }
+
+        if let bookmark = preferences.externalAnimationBookmark {
+            do {
+                var isStale = false
+                let url = try URL(resolvingBookmarkData: bookmark,
+                                  options: [.withSecurityScope],
+                                  relativeTo: nil,
+                                  bookmarkDataIsStale: &isStale)
+                if isStale {
+                    let refreshedBookmark = try url.bookmarkData(options: [.withSecurityScope],
+                                                                 includingResourceValuesForKeys: nil,
+                                                                 relativeTo: nil)
+                    preferences.externalAnimationBookmark = refreshedBookmark
+                }
+                preferences.externalAnimationPath = url.path
+                updateExternalDirectory(url: url)
+                return
+            } catch {
+                NSLog("[Menubar RunCat] Failed to restore external animation bookmark: %@", error.localizedDescription)
+                preferences.externalAnimationBookmark = nil
             }
+        }
+
+        if let path = preferences.externalAnimationPath {
+            let url = URL(fileURLWithPath: path, isDirectory: true)
             updateExternalDirectory(url: url)
-        } catch {
-            NSLog("[Menubar RunCat] Failed to restore external animation access: %@", error.localizedDescription)
-            preferences.externalAnimationBookmark = nil
         }
     }
 
@@ -194,6 +196,20 @@ final class StatusBarController: NSObject {
             NSLog("[Menubar RunCat] Accessing external directory without security scope: %@", url.path)
         }
         ensureDirectoryExists(at: url)
+    }
+
+    private func saveExternalDirectorySelection(_ url: URL) {
+        do {
+            let bookmark = try url.bookmarkData(options: [.withSecurityScope],
+                                                includingResourceValuesForKeys: nil,
+                                                relativeTo: nil)
+            preferences.externalAnimationBookmark = bookmark
+        } catch {
+            preferences.externalAnimationBookmark = nil
+            NSLog("[Menubar RunCat] Failed to create bookmark, falling back to path: %@", error.localizedDescription)
+        }
+        preferences.externalAnimationPath = url.path
+        updateExternalDirectory(url: url)
     }
 
     private func releaseExternalDirectoryAccess() {
