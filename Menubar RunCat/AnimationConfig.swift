@@ -1,11 +1,12 @@
 import Cocoa
 
 struct AnimationFrameSize: Codable {
-    let width: Double
-    let height: Double
+    let width: Double?
+    let height: Double?
 
-    var size: NSSize {
-        NSSize(width: width, height: height)
+    var size: NSSize? {
+        guard let width, let height else { return nil }
+        return NSSize(width: width, height: height)
     }
 }
 

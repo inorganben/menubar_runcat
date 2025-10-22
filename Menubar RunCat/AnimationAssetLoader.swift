@@ -81,7 +81,7 @@ final class AnimationAssetLoader {
         }
 
         var frames: [NSImage] = []
-        let size = config.frameSize?.size
+        let sizeConfig = config.frameSize
         for name in frameNames {
             let url: URL
             if name.contains("/") {
@@ -90,8 +90,8 @@ final class AnimationAssetLoader {
                 url = frameDirectoryURL.appendingPathComponent(name)
             }
             guard let image = NSImage(contentsOf: url) else { continue }
-            if let size {
-                image.size = size
+            if let sizeConfig {
+                resize(image: image, using: sizeConfig)
             }
             image.isTemplate = config.template ?? false
             frames.append(image)
@@ -111,4 +111,22 @@ final class AnimationAssetLoader {
         return resourceValues?.isDirectory ?? false
     }
 
+    private func resize(image: NSImage, using config: AnimationFrameSize) {
+        let targetHeight = config.height ?? 0
+        let targetWidth = config.width
+        if targetHeight > 0 {
+            let aspect = image.size.height > 0 ? image.size.width / image.size.height : 0
+            let width: CGFloat
+            if let targetWidth {
+                width = CGFloat(targetWidth)
+            } else if aspect > 0 {
+                width = CGFloat(targetHeight) * aspect
+            } else {
+                width = image.size.width
+            }
+            image.size = NSSize(width: width, height: CGFloat(targetHeight))
+        } else if let targetWidth {
+            image.size = NSSize(width: CGFloat(targetWidth), height: image.size.height)
+        }
+    }
 }
