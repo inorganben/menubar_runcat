@@ -10,6 +10,10 @@
 [![Github top language](https://img.shields.io/github/languages/top/inorganben/menubar_runcat)](https://github.com/inorganben/menubar_runcat/)
 [![Github license](https://img.shields.io/github/license/inorganben/menubar_runcat)](https://github.com/inorganben/menubar_runcat/)
 
+# GifConverter
+可以选择GIF转为此应用能识别的格式的小脚本
+原本只做了flet版，但是我的x86Mac运行不了，MacMini可以，于是又做了一个Tkinter的
+
 # Tags
 
 `Swift` `Cat` `menubar`
